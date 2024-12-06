@@ -848,6 +848,7 @@ _RedisCallbacksRESP3 = {
         lambda r, **kwargs: r,
     ),
     **string_keys_to_dict("XREAD XREADGROUP", parse_xread_resp3),
+    **string_keys_to_dict("BLPOP BRPOP", lambda r: r and tuple(r) or None),
     "ACL LOG": lambda r: (
         [
             {str_if_bytes(key): str_if_bytes(value) for key, value in x.items()}
